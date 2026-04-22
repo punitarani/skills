@@ -203,6 +203,8 @@ Swap `Source` value for Podcast, Newsletter, LinkedIn, etc.
 
 Great prep before a meeting. Takes 2-4 tool calls.
 
+**Deep briefing variant.** If the user is prepping for a meeting ("brief me on X, coffee tomorrow"), offer to augment the CRM data with a light external lookup — recent posts on their X / LinkedIn, news mentions of their company, career changes since you last updated their record. One or two searches, only the last month or so of signal, surfacing things worth mentioning in conversation. Full pattern in `references/enrichment.md` under "Pre-meeting briefings." Always separate "from your CRM" from "from the web" in the response so the user can tell what's fresh.
+
 ---
 
 ## Recipe: "How many people have I met from [source]?"

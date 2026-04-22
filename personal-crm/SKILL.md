@@ -37,6 +37,8 @@ If the search returns zero or multiple plausible matches, ask the user for the U
 
 When setting a relation, pass the **page URL** of the related row (not the DS ID). When searching within a database, pass `data_source_url: "collection://<DS_ID>"`.
 
+**Step 4: Know your enrichment tools.** `web_search` and `web_fetch` are always available — use them to look up people, companies, or handles when the user gave you less than they know about. Some workspaces also have specialized MCPs that do this better (Exa for research-grade web search, or dedicated LinkedIn / X / company-info servers). Run a quick `tool_search(query="linkedin profile")`, `tool_search(query="twitter x profile")`, and `tool_search(query="company lookup")` once per conversation to see what's connected. If nothing relevant is loaded but `search_mcp_registry` surfaces candidates, mention them to the user via `suggest_connectors` — don't connect them yourself. Use whatever's available. Full enrichment patterns and privacy guardrails live in `references/enrichment.md`.
+
 ## Mental model: capture first, enrich later
 
 The system is deliberately low-friction at capture. Weekly review handles enrichment. When the user says "I met Alice today at the Stripe offsite, she works at Anthropic on evals" — you should:
@@ -110,15 +112,17 @@ Notion:notion-create-pages(
 
 ## Core workflow 2: add an interesting person the user found online
 
-Trigger phrases: "interesting person I found on Twitter", "add X to my radar", "want to track this founder", "potentially meet eventually".
+Trigger phrases: "interesting person I found on Twitter", "add X to my radar", "want to track this founder", "potentially meet eventually", "add @handle to my CRM".
 
-Same as above but with three key differences:
+This is the workflow where enrichment earns its keep. The user often gives you just a handle, a name, or a single sentence of context — the whole point of "on radar" is you want to *know more* over time. Before creating the record, do a light enrichment pass (see Core workflow 6 and `references/enrichment.md`) to fill in real name, role, company, location, and their main URLs.
+
+Three differences from Workflow 1:
 - `Status: "Never met - on radar"`
-- `How we met`: write where you found them — "Found via their Substack essay on mechanistic interpretability, April 2026"
+- `How we met`: write where you found them *and note the enrichment source* — e.g. "Found via their Substack essay on mechanistic interpretability, April 2026. Profile enriched via LinkedIn."
 - No `First met` date (they haven't been met)
 - `Source` is usually `Twitter/X`, `LinkedIn`, `Podcast`, `Newsletter`, or `Online community`
 
-The ✨ On radar view on People already filters to these — the user can flip through them before travel or events.
+The ✨ On radar view on People already filters to these — the user can flip through them before travel or events. Rich profiles make that flip-through actually useful.
 
 ## Core workflow 3: log an interaction
 
@@ -193,6 +197,40 @@ Or — "who haven't I talked to in 6 months?" — pre-built views can't express 
 
 The full query cookbook — exact filter configurations, which view to use for which question, and the `fetch` patterns for graph-traversal queries like "who has mutual connections with Alice" — lives in `references/queries.md`.
 
+## Core workflow 6: enrich a profile with external data
+
+Trigger phrases: "look him up on LinkedIn", "find her Twitter", "who is @handle", "fill in what you can find about X", "brief me on Y before the meeting", or whenever the user gave you less info than you need and the gap is fillable from public sources.
+
+**When to enrich automatically (don't ask):**
+- Workflow 2 (on-radar) — enrichment is the whole point. User gave you a handle or one-liner; fill in the professional basics.
+- Pre-meeting briefings — fetch recent public activity (last month of posts, recent news mentions, career moves) to surface fresh conversation fuel.
+- Explicit lookups — user says "find Bob's LinkedIn," just do it.
+
+**When to ask first:**
+- Inner 5 / Close 15 tier. These are personal contacts the user already knows intimately; web-searching them feels off. Ask: "Want me to skip the lookup since you know them well, or is there something specific you want me to find?"
+- When you don't know which person the user means (common name, no context).
+
+**When NOT to enrich:**
+- When the user explicitly wants speed ("just capture her name, I'll fill the rest later").
+- For anyone whose Status is `Do not contact`.
+- When the user says "don't google them" or equivalent.
+
+### The enrichment loop
+
+1. **Pick the right tool.** Check what's available. MCPs specifically for LinkedIn or X will return cleaner structured data than web search. Exa is excellent for people-research when connected. Fall back to `web_search` + `web_fetch` otherwise.
+
+2. **Query wisely.** If you have a handle, search for it. If you have a name + weak context, combine them: "Maya Rodriguez Linear design" beats "Maya Rodriguez" alone. Two or three queries max per person — this is light enrichment, not investigation.
+
+3. **Extract only publicly-professional info:** real name, current role, current company, city, headline/bio, public URLs (LinkedIn, X, GitHub, personal site). Skip anything that feels private — personal phone numbers or home addresses you stumbled into, drama, old posts out of context.
+
+4. **Write to the CRM with attribution.** In `How we met` or append to the page body: "Profile enriched via LinkedIn on [date]." This matters — future-you needs to know which facts came from the user's direct knowledge vs. from a web fetch. Also useful if facts later turn out wrong.
+
+5. **Report what changed.** In your reply, clearly distinguish what the user told you from what enrichment added: *"Added Neel Nanda (as you described). From LinkedIn: he's a researcher at DeepMind in London, works on mechanistic interpretability."*
+
+### Detailed enrichment recipes
+
+Patterns for handle → profile, name → LinkedIn, company enrichment, and pre-meeting recent-activity lookups live in `references/enrichment.md`. Read that when the enrichment gets non-trivial, when a lookup returns ambiguous results, or when the user asks for the deep-briefing variant.
+
 ## Finding existing pages
 
 Before creating anything, search. The CRM rewards linking over duplicating.
@@ -246,6 +284,7 @@ Knowing this lets you answer "is this urgent?" without a round-trip. If the user
 
 - **`references/schema.md`** — when you need the complete, authoritative field list for any database. All select options. All relations. All back-references. Read this when the user asks for a field you're not 100% sure of.
 - **`references/queries.md`** — when the user asks a query question and you're not sure which view matches or how to write the filter. Covers all 16 pre-built views and recipes for common freeform queries.
+- **`references/enrichment.md`** — when you're enriching a profile with external data. Has the handle-to-profile pattern, name-disambiguation recipes, company enrichment, pre-meeting briefing recipes, and the privacy guardrails.
 - **`references/edge-cases.md`** — when something breaks, when the user asks to do something unusual, or when you need the exhaustive list of gotchas (the formula/rollup self-reference bug, the self-relation DDL quirk, how to handle name collisions, etc.).
 
 ## What this skill is not for
@@ -263,3 +302,4 @@ Knowing this lets you answer "is this urgent?" without a round-trip. If the user
 4. **Never touch auto-calculated fields.** Rollups, formulas, timestamps are read-only.
 5. **The `Mentioned` field on Interactions is the most underused and most valuable.** Use it aggressively when people come up in conversation without being present.
 6. **If unsure of a select-option value, look it up in `schema.md` rather than guessing.** Inventing new option values silently fails.
+7. **Enrich with attribution, not stealth.** When external data goes into the CRM, note the source and date in `How we met` or the page body. Keep enrichment light — 2-3 queries per person, professional-public only, skip the Inner 5 unless asked.
