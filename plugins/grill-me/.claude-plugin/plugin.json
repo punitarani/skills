@@ -1,0 +1,11 @@
+{
+  "name": "grill-me",
+  "version": "1.0.0",
+  "description": "Interview the user relentlessly about a plan or design until shared understanding is reached.",
+  "author": {
+    "name": "punitarani",
+    "email": "punitsai36@gmail.com"
+  },
+  "homepage": "https://github.com/punitarani/skills",
+  "license": "MIT"
+}

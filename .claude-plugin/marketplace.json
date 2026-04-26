@@ -1,0 +1,35 @@
+{
+  "name": "skills",
+  "owner": {
+    "name": "punitarani",
+    "email": "punitsai36@gmail.com",
+    "url": "https://github.com/punitarani"
+  },
+  "metadata": {
+    "description": "Personal Claude Code skills: Notion CRM, market intelligence, and plan-grilling.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "personal-crm",
+      "source": "./plugins/personal-crm",
+      "description": "Operate a Notion Personal CRM (People/Companies/Interactions/Topics/Places) — capture contacts, log meetings, query follow-ups.",
+      "category": "productivity",
+      "tags": ["notion", "crm", "contacts"]
+    },
+    {
+      "name": "market-intelligence",
+      "source": "./plugins/market-intelligence",
+      "description": "Build, enrich, verify, and activate competitive intelligence in Obsidian vaults; map relationships and ship outreach lists.",
+      "category": "research",
+      "tags": ["obsidian", "research", "outreach"]
+    },
+    {
+      "name": "grill-me",
+      "source": "./plugins/grill-me",
+      "description": "Stress-test plans and designs by interviewing the user one decision at a time.",
+      "category": "workflow",
+      "tags": ["planning", "design"]
+    }
+  ]
+}

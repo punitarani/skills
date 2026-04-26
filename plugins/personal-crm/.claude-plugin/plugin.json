@@ -1,0 +1,11 @@
+{
+  "name": "personal-crm",
+  "version": "1.0.0",
+  "description": "Notion Personal CRM operating manual — 5-database graph (People/Companies/Interactions/Topics/Places).",
+  "author": {
+    "name": "punitarani",
+    "email": "punitsai36@gmail.com"
+  },
+  "homepage": "https://github.com/punitarani/skills",
+  "license": "MIT"
+}

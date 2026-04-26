@@ -1,0 +1,11 @@
+{
+  "name": "market-intelligence",
+  "version": "1.0.0",
+  "description": "Build, enrich, verify, and activate competitive intelligence in Obsidian vaults.",
+  "author": {
+    "name": "punitarani",
+    "email": "punitsai36@gmail.com"
+  },
+  "homepage": "https://github.com/punitarani/skills",
+  "license": "MIT"
+}
