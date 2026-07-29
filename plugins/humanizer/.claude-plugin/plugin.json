@@ -1,0 +1,12 @@
+{
+  "name": "humanizer",
+  "version": "2.9.1",
+  "description": "Remove signs of AI-generated writing from text, making it sound more natural and human. Based on Wikipedia's \"Signs of AI writing\" guide.",
+  "author": {
+    "name": "Siqi Chen (blader)",
+    "url": "https://github.com/blader"
+  },
+  "homepage": "https://github.com/punitarani/skills",
+  "license": "MIT",
+  "keywords": ["writing", "editing", "ai-detection", "humanize", "prose", "style"]
+}
