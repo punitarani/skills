@@ -30,6 +30,13 @@
       "description": "Stress-test plans and designs by interviewing the user one decision at a time.",
       "category": "workflow",
       "tags": ["planning", "design"]
+    },
+    {
+      "name": "humanizer",
+      "source": "./plugins/humanizer",
+      "description": "Remove signs of AI-generated writing from text, making it sound more natural and human. Based on Wikipedia's \"Signs of AI writing\" guide.",
+      "category": "writing",
+      "tags": ["writing", "editing", "prose", "style"]
     }
   ]
 }
