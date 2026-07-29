@@ -6,8 +6,8 @@
     "url": "https://github.com/punitarani"
   },
   "metadata": {
-    "description": "Personal Claude Code skills: Notion CRM, market intelligence, and plan-grilling.",
-    "version": "1.0.0"
+    "description": "Personal Claude Code skills: Notion CRM, market intelligence, plan-grilling, prose humanizing, and essay writing.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -37,6 +37,13 @@
       "description": "Remove signs of AI-generated writing from text, making it sound more natural and human. Based on Wikipedia's \"Signs of AI writing\" guide.",
       "category": "writing",
       "tags": ["writing", "editing", "prose", "style"]
+    },
+    {
+      "name": "essayist",
+      "source": "./plugins/essayist",
+      "description": "Research and write thesis-driven essays and articles in the Sequoia/a16z genre — deep research with sourced evidence, named frames, planted callbacks, and an anti-AI-slop audit.",
+      "category": "writing",
+      "tags": ["writing", "essays", "research", "notion"]
     }
   ]
 }

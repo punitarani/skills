@@ -10,6 +10,7 @@ A Claude Code plugin marketplace shipping a few personal skills.
 | [`market-intelligence`](plugins/market-intelligence) | Build, enrich, verify, and activate competitive intelligence in Obsidian vaults; map relationships and ship outreach lists. |
 | [`grill-me`](plugins/grill-me) | Stress-test plans and designs by interviewing one decision at a time. |
 | [`humanizer`](plugins/humanizer) | Strip the tells of AI-generated writing out of prose. Forked from [blader/humanizer](https://github.com/blader/humanizer). |
+| [`essayist`](plugins/essayist) | Research and draft thesis-driven essays in the Sequoia/a16z genre — deep research, named frames, planted callbacks, and a mechanical anti-slop audit. |
 
 ## Install
 
@@ -21,6 +22,7 @@ In Claude Code:
 /plugin install market-intelligence@skills
 /plugin install grill-me@skills
 /plugin install humanizer@skills
+/plugin install essayist@skills
 ```
 
 Pick whichever plugins you want — they install independently.

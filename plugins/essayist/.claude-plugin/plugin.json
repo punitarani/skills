@@ -1,0 +1,12 @@
+{
+  "name": "essayist",
+  "version": "0.1.0",
+  "description": "Research and write thesis-driven essays and articles in the style of the best strategy essays (the Sequoia/a16z genre): deep research with sourced evidence, named frameworks, planted callbacks, and an anti-AI-slop audit.",
+  "author": {
+    "name": "Punit Arani",
+    "url": "https://github.com/punitarani"
+  },
+  "homepage": "https://github.com/punitarani/skills",
+  "license": "MIT",
+  "keywords": ["writing", "essays", "blogging", "research", "thought-leadership", "notion"]
+}
