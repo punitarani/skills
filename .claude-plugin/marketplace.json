@@ -6,8 +6,8 @@
     "url": "https://github.com/punitarani"
   },
   "metadata": {
-    "description": "Personal Claude Code skills: Notion CRM, market intelligence, plan-grilling, prose humanizing, and essay writing.",
-    "version": "1.1.0"
+    "description": "Personal Claude Code skills: Notion CRM, market intelligence, plan-grilling, prose humanizing, essay writing, and Three.js reference.",
+    "version": "1.2.0"
   },
   "plugins": [
     {
@@ -44,6 +44,13 @@
       "description": "Research and write thesis-driven essays and articles in the Sequoia/a16z genre — deep research with sourced evidence, named frames, planted callbacks, and an anti-AI-slop audit.",
       "category": "writing",
       "tags": ["writing", "essays", "research", "notion"]
+    },
+    {
+      "name": "threejs",
+      "source": "./plugins/threejs",
+      "description": "Three.js reference skills — scene setup, geometry, materials, lighting, textures, animation, loaders, shaders, post-processing, and interaction.",
+      "category": "development",
+      "tags": ["threejs", "3d", "webgl", "graphics"]
     }
   ]
 }
